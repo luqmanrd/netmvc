@@ -1,0 +1,70 @@
+﻿@model netmvc.Models.tblT_Reservasi
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Reservasi_PK)
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.SubjectReservasi, "Subject Reservasi", htmlAttributes: new { @class = "col-lg-4 col-form-label"})
+    <div class="col-lg-6">
+        @Html.EditorFor(model => model.SubjectReservasi, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        @Html.ValidationMessageFor(model => model.SubjectReservasi, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Ruangan_FK, "Room", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+        <div class="col-lg-6">
+            @Html.DropDownList("Ruangan_FK", new SelectList(ViewBag.data, "Ruangan_PK", "NamaRuangan"), new { @class = "form-control", @disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Ruangan_FK, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.TanggalReservasi, "Date", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+        <div class="col-lg-6">
+            <input type="date" class="form-control mydatepicker" id="TanggalReservasi" name="TanggalReservasi" placeholder="mm/dd/yyyy" value=@Model.TanggalReservasi.Value.ToString("yyyy-MM-dd") disabled />
+            @*@Html.EditorFor(model => model.TanggalReservasi, new { htmlAttributes = new { @class = "form-control", @Value = Model.TanggalReservasi, type = "date" } })*@
+            @*@Html.EditorFor(model => model.TanggalReservasi, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.TanggalReservasi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.JamMulai, "Start", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+        <div class="col-lg-6">
+            <input type="time" class="form-control" id="JamMulai" name="JamMulai" value=@Model.JamMulai disabled>
+            @*@Html.EditorFor(model => model.JamMulai, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.JamMulai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.JamSelesai, "End", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+        <div class="col-lg-6">
+            <input type="time" class="form-control" id="JamSelesai" name="JamSelesai" value=@Model.JamSelesai disabled>
+            @*@Html.EditorFor(model => model.JamSelesai, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.JamSelesai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-8 ml-auto">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

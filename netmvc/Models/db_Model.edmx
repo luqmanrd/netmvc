@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NetMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblM_Ruangan">
+          <Key>
+            <PropertyRef Name="Ruangan_PK" />
+          </Key>
+          <Property Name="Ruangan_PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaRuangan" Type="nvarchar" MaxLength="200" />
+          <Property Name="Lantai" Type="int" />
+          <Property Name="DayaTampung" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Status_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="tblM_Status">
+          <Key>
+            <PropertyRef Name="Status_PK" />
+          </Key>
+          <Property Name="Status_PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaStatus" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblT_Reservasi">
+          <Key>
+            <PropertyRef Name="Reservasi_PK" />
+          </Key>
+          <Property Name="Reservasi_PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ruangan_FK" Type="int" />
+          <Property Name="SubjectReservasi" Type="nvarchar(max)" />
+          <Property Name="TanggalReservasi" Type="date" />
+          <Property Name="JamMulai" Type="time" Precision="7" />
+          <Property Name="JamSelesai" Type="time" Precision="7" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MDKAReservasi.dbo.Vw_Reservasi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vw_Reservasi">
+          <Key>
+            <PropertyRef Name="Reservasi_PK" />
+          </Key>
+          <Property Name="Reservasi_PK" Type="int" Nullable="false" />
+          <Property Name="Ruangan_FK" Type="int" />
+          <Property Name="NamaRuangan" Type="nvarchar" MaxLength="200" />
+          <Property Name="Lantai" Type="int" />
+          <Property Name="DayaTampung" Type="int" />
+          <Property Name="SubjectReservasi" Type="nvarchar(max)" />
+          <Property Name="TanggalReservasi" Type="date" />
+          <Property Name="JamMulai" Type="time" Precision="7" />
+          <Property Name="JamSelesai" Type="time" Precision="7" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <Function Name="tblM_Ruangan_UpdateToBooked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pk_id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="NetMVCModelStoreContainer">
+          <EntitySet Name="tblM_Ruangan" EntityType="Self.tblM_Ruangan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblM_Status" EntityType="Self.tblM_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblT_Reservasi" EntityType="Self.tblT_Reservasi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vw_Reservasi" EntityType="Self.Vw_Reservasi" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_Reservasi].[Reservasi_PK] AS [Reservasi_PK], 
+    [Vw_Reservasi].[Ruangan_FK] AS [Ruangan_FK], 
+    [Vw_Reservasi].[NamaRuangan] AS [NamaRuangan], 
+    [Vw_Reservasi].[Lantai] AS [Lantai], 
+    [Vw_Reservasi].[DayaTampung] AS [DayaTampung], 
+    [Vw_Reservasi].[SubjectReservasi] AS [SubjectReservasi], 
+    [Vw_Reservasi].[TanggalReservasi] AS [TanggalReservasi], 
+    [Vw_Reservasi].[JamMulai] AS [JamMulai], 
+    [Vw_Reservasi].[JamSelesai] AS [JamSelesai], 
+    [Vw_Reservasi].[CreatedBy] AS [CreatedBy], 
+    [Vw_Reservasi].[CreatedDate] AS [CreatedDate], 
+    [Vw_Reservasi].[UpdatedBy] AS [UpdatedBy], 
+    [Vw_Reservasi].[UpdatedDate] AS [UpdatedDate]
+    FROM [dbo].[Vw_Reservasi] AS [Vw_Reservasi]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NetMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NetMVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblM_Ruangan" EntityType="NetMVCModel.tblM_Ruangan" />
+          <EntitySet Name="tblM_Status" EntityType="NetMVCModel.tblM_Status" />
+          <EntitySet Name="tblT_Reservasi" EntityType="NetMVCModel.tblT_Reservasi" />
+          <EntitySet Name="Vw_Reservasi" EntityType="NetMVCModel.Vw_Reservasi" />
+          <FunctionImport Name="tblM_Ruangan_UpdateToBooked">
+            <Parameter Name="pk_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="tblM_Ruangan">
+          <Key>
+            <PropertyRef Name="Ruangan_PK" />
+          </Key>
+          <Property Name="Ruangan_PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaRuangan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Lantai" Type="Int32" />
+          <Property Name="DayaTampung" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status_FK" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblM_Status">
+          <Key>
+            <PropertyRef Name="Status_PK" />
+          </Key>
+          <Property Name="Status_PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblT_Reservasi">
+          <Key>
+            <PropertyRef Name="Reservasi_PK" />
+          </Key>
+          <Property Name="Reservasi_PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ruangan_FK" Type="Int32" />
+          <Property Name="SubjectReservasi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TanggalReservasi" Type="DateTime" Precision="0" />
+          <Property Name="JamMulai" Type="Time" Precision="7" />
+          <Property Name="JamSelesai" Type="Time" Precision="7" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Vw_Reservasi">
+          <Key>
+            <PropertyRef Name="Reservasi_PK" />
+          </Key>
+          <Property Name="Reservasi_PK" Type="Int32" Nullable="false" />
+          <Property Name="Ruangan_FK" Type="Int32" />
+          <Property Name="NamaRuangan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Lantai" Type="Int32" />
+          <Property Name="DayaTampung" Type="Int32" />
+          <Property Name="SubjectReservasi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TanggalReservasi" Type="DateTime" Precision="0" />
+          <Property Name="JamMulai" Type="Time" Precision="7" />
+          <Property Name="JamSelesai" Type="Time" Precision="7" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NetMVCModelStoreContainer" CdmEntityContainer="NetMVCEntities">
+          <EntitySetMapping Name="tblM_Ruangan">
+            <EntityTypeMapping TypeName="NetMVCModel.tblM_Ruangan">
+              <MappingFragment StoreEntitySet="tblM_Ruangan">
+                <ScalarProperty Name="Status_FK" ColumnName="Status_FK" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DayaTampung" ColumnName="DayaTampung" />
+                <ScalarProperty Name="Lantai" ColumnName="Lantai" />
+                <ScalarProperty Name="NamaRuangan" ColumnName="NamaRuangan" />
+                <ScalarProperty Name="Ruangan_PK" ColumnName="Ruangan_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblM_Status">
+            <EntityTypeMapping TypeName="NetMVCModel.tblM_Status">
+              <MappingFragment StoreEntitySet="tblM_Status">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="NamaStatus" ColumnName="NamaStatus" />
+                <ScalarProperty Name="Status_PK" ColumnName="Status_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblT_Reservasi">
+            <EntityTypeMapping TypeName="NetMVCModel.tblT_Reservasi">
+              <MappingFragment StoreEntitySet="tblT_Reservasi">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="JamSelesai" ColumnName="JamSelesai" />
+                <ScalarProperty Name="JamMulai" ColumnName="JamMulai" />
+                <ScalarProperty Name="TanggalReservasi" ColumnName="TanggalReservasi" />
+                <ScalarProperty Name="SubjectReservasi" ColumnName="SubjectReservasi" />
+                <ScalarProperty Name="Ruangan_FK" ColumnName="Ruangan_FK" />
+                <ScalarProperty Name="Reservasi_PK" ColumnName="Reservasi_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_Reservasi">
+            <EntityTypeMapping TypeName="NetMVCModel.Vw_Reservasi">
+              <MappingFragment StoreEntitySet="Vw_Reservasi">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="JamSelesai" ColumnName="JamSelesai" />
+                <ScalarProperty Name="JamMulai" ColumnName="JamMulai" />
+                <ScalarProperty Name="TanggalReservasi" ColumnName="TanggalReservasi" />
+                <ScalarProperty Name="SubjectReservasi" ColumnName="SubjectReservasi" />
+                <ScalarProperty Name="DayaTampung" ColumnName="DayaTampung" />
+                <ScalarProperty Name="Lantai" ColumnName="Lantai" />
+                <ScalarProperty Name="NamaRuangan" ColumnName="NamaRuangan" />
+                <ScalarProperty Name="Ruangan_FK" ColumnName="Ruangan_FK" />
+                <ScalarProperty Name="Reservasi_PK" ColumnName="Reservasi_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="tblM_Ruangan_UpdateToBooked" FunctionName="NetMVCModel.Store.tblM_Ruangan_UpdateToBooked" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

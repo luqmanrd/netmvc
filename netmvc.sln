@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netmvc", "netmvc\netmvc.csproj", "{2503B9CF-7EEA-4462-9896-24852815095C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2503B9CF-7EEA-4462-9896-24852815095C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2503B9CF-7EEA-4462-9896-24852815095C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2503B9CF-7EEA-4462-9896-24852815095C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2503B9CF-7EEA-4462-9896-24852815095C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C384A094-40FC-4E0B-86AE-8FA7FDCDE95E}
+	EndGlobalSection
+EndGlobal

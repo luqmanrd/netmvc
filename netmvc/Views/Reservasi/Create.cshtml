@@ -1,0 +1,88 @@
+﻿@model netmvc.Models.tblT_Reservasi
+
+@{
+    ViewBag.Title = "Add New Reservasi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="row page-titles mx-0">
+    <div class="col p-md-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Reservasi")">Reservasi</a></li>
+            <li class="breadcrumb-item active">Add</li>
+        </ol>
+    </div>
+</div>
+<!-- row -->
+@if (ViewBag.Message != null)
+{
+    <div class="card-content">
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button> @ViewBag.Message
+        </div>
+    </div>
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.SubjectReservasi, "Subject Reservasi", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+                                <div class="col-lg-6">
+                                    @Html.EditorFor(model => model.SubjectReservasi, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SubjectReservasi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Ruangan_FK, "Room", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+                                <div class="col-lg-6">
+                                    @Html.DropDownList("Ruangan_FK", new SelectList(ViewBag.data, "Ruangan_PK", "NamaRuangan"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Ruangan_FK, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.TanggalReservasi, "Date", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+                                <div class="col-lg-6">
+                                    <input type="date" class="form-control mydatepicker" id="TanggalReservasi" name="TanggalReservasi" placeholder="mm/dd/yyyy">
+                                    @*@Html.EditorFor(model => model.TanggalReservasi, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.ValidationMessageFor(model => model.TanggalReservasi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.JamMulai, "Start", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+                                <div class="col-lg-6">
+                                    <input type="time" class="form-control" id="JamMulai" name="JamMulai">
+                                    @*@Html.EditorFor(model => model.JamMulai, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.ValidationMessageFor(model => model.JamMulai, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.JamSelesai, "End", htmlAttributes: new { @class = "col-lg-4 col-form-label" })
+                                <div class="col-lg-6">
+                                    <input type="time" class="form-control" id="JamSelesai" name="JamSelesai">
+                                    @*@Html.EditorFor(model => model.JamSelesai, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.ValidationMessageFor(model => model.JamSelesai, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-8 ml-auto">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
